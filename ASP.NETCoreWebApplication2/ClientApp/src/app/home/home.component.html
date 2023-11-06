@@ -1,0 +1,43 @@
+<h2>Выберите игроков:</h2>
+
+<p *ngIf="!formPlayer.value.length" class="spinner">
+	<mat-spinner diameter="50"></mat-spinner>
+</p>
+
+<form [formGroup]="formGroup" *ngIf="!!formPlayer.value.length" (ngSubmit)="submit()">
+	<div class="form-fields-container">
+		<ng-container *ngFor="let child of formPlayer.controls; index as i" formArrayName="players">
+			<mat-card>
+				<mat-card-content>
+					<div [formGroupName]="i" class="form-fields">
+						<mat-checkbox formControlName="selected" color="primary">
+							{{ formPlayer.value[i].name }}
+						</mat-checkbox>
+						<mat-button-toggle-group formControlName="role">
+							<mat-button-toggle [value]="1">Нап</mat-button-toggle>
+							<mat-button-toggle [value]="2">Защ</mat-button-toggle>
+						</mat-button-toggle-group>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</ng-container>
+	</div>
+	<p><mat-checkbox [formControl]="formPreferredSide" color="primary">Учитывать предпочтения по майкам</mat-checkbox></p>
+	<p>Выбрано нападающих: {{qtySelectedForwards()}}</p>
+	<p>Выбрано защитников: {{qtySelectedDefenders()}}</p>
+	<button class="submit-button" [disabled]="submitButtonState" mat-raised-button color="primary" type="submit">
+		<div class="submit-button__wrapper">
+			<mat-spinner diameter="20"></mat-spinner>
+			<span><span>Сформировать</span></span>
+			<span class="submit-button__empty"></span>
+		</div>
+	</button>
+</form>
+
+<ng-container *ngIf="!!teamCombination">
+	<mat-accordion multi scrollTo class="sys__accordion">
+		<app-expansion-hockey-team [team]="teamCombination.firstTeam"></app-expansion-hockey-team>
+		<app-expansion-hockey-team [team]="teamCombination.secondTeam"></app-expansion-hockey-team>
+	</mat-accordion>
+</ng-container>
+

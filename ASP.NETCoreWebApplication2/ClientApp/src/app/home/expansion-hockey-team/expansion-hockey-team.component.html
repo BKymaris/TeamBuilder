@@ -1,0 +1,27 @@
+<mat-expansion-panel [expanded]="true" class="team-expansion-panel">
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			{{team.teamSide === 1 ? 'Команда Белых' : 'Команда Чёрных'}}
+		</mat-panel-title>
+		<mat-panel-description>{{getSkill(team.skill.skill)}}</mat-panel-description>
+	</mat-expansion-panel-header>
+	<p class="role-headline">
+		<span>Нападение</span>
+		<span class="role-headline__skill">{{getSkill(team.skill.skillForwards)}}</span>
+	</p>
+	<div class="player-list">
+		<mat-chip-list >
+			<mat-chip *ngFor="let player of getPlayersByRole(1)">{{player.name}}</mat-chip>
+		</mat-chip-list>
+	</div>
+	<mat-divider></mat-divider>
+	<p class="role-headline role-headline--indent">
+		<span>Защита</span>
+		<span class="role-headline__skill">{{getSkill(team.skill.skillDefenders)}}</span>
+	</p>
+	<div class="player-list">
+		<mat-chip-list >
+			<mat-chip *ngFor="let player of getPlayersByRole(2)">{{player.name}}</mat-chip>
+		</mat-chip-list>
+	</div>
+</mat-expansion-panel>

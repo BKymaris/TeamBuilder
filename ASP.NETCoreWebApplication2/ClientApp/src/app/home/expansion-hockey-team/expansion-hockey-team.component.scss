@@ -1,0 +1,21 @@
+.team-expansion-panel .mat-expansion-panel-header-description {
+	justify-content: flex-end;
+}
+
+.role-headline {
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+
+	&--indent {
+		margin: 12px 0;
+	 }
+
+	&__skill {
+		color: rgba(0,0,0,.54);
+	}
+}
+
+.player-list {
+	margin: 1em 0;
+}
